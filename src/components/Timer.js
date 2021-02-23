@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   TimerContainer,
   StartInputsContainer,
+  ReadingTimeContainer,
+  ButtonsContainer,
+  PausePlayButton,
+  ResetButton,
   Modal,
 } from "../layout/Timer.styled";
-// import { FiBook } from "react-icons/fi";
+import { RiPlayFill, RiStopFill, RiPauseFill } from "react-icons/ri";
 
 const Timer = () => {
   const [isActive, setIsActive] = useState(false);
@@ -27,7 +31,7 @@ const Timer = () => {
     setIsActive(false);
     setMinutes(30);
     setSeconds(0);
-    setPages(0);
+    setPages(1);
   }
   function closeModal() {
     setModal(false);
@@ -86,14 +90,14 @@ const Timer = () => {
           )
         : ""}
       {isActive && (
-        <>
+        <ReadingTimeContainer>
           <h1>
             {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
           </h1>
 
           <span>You've start from: {pages} page</span>
           <h3>Reading Time!!!</h3>
-        </>
+        </ReadingTimeContainer>
       )}
       {!isActive && (
         <StartInputsContainer>
@@ -115,21 +119,23 @@ const Timer = () => {
           <input
             type="number"
             className="pages"
-            min="0"
+            min="1"
             max="10000"
             onChange={getPages}
-            placeholder={0}
+            placeholder={1}
             required
           />
           <h1>{pages}</h1>
         </StartInputsContainer>
       )}
-      <button className="start" onClick={timerStart}>
-        {isActive ? "Stop" : "Start"}
-      </button>
-      <button className="reset" onClick={timerReset}>
-        Reset
-      </button>
+      <ButtonsContainer>
+        <PausePlayButton onClick={timerStart}>
+          {isActive ? <RiPauseFill /> : <RiPlayFill />}
+        </PausePlayButton>
+        <ResetButton onClick={timerReset}>
+          <RiStopFill />
+        </ResetButton>
+      </ButtonsContainer>
       {/* {book.map((item) => {
         return (
           <>
