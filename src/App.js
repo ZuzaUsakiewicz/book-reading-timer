@@ -9,6 +9,7 @@ import {
   Header,
 } from "./layout/theme";
 import { FiSun, FiMoon } from "react-icons/fi";
+import Timer from "./components/Timer";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -20,10 +21,12 @@ function App() {
       <GlobalStyles />
       <AppContainer>
         <Header>
+          <h2>Book Time!</h2>
           <ThemeButton onClick={() => toggleTheme()}>
             {theme === "light" ? <FiMoon /> : <FiSun />}
           </ThemeButton>
         </Header>
+        <Timer />
       </AppContainer>
     </ThemeProvider>
   );
