@@ -13,17 +13,17 @@ import { RiPlayFill, RiStopFill, RiPauseFill } from "react-icons/ri";
 const Timer = () => {
   const [isActive, setIsActive] = useState(false);
   const [pages, setPages] = useState(1);
-  // const [book, setBook] = useState([]);
-  const [endPages, setEndPages] = useState(0);
+  const [endPages, setEndPages] = useState(1);
   const [minutes, setMinutes] = useState(30);
   const [seconds, setSeconds] = useState(0);
   const [modal, setModal] = useState(false);
 
   function getNumbers(e) {
     e.preventDefault();
-    setMinutes(e.target.value > 0 ? e.target.value : 1);
+    setMinutes(e.target.value >= 0 ? e.target.value : 1);
     setSeconds(0);
   }
+
   function timerStart() {
     setIsActive((prev) => !prev);
   }
@@ -37,16 +37,14 @@ const Timer = () => {
     setModal(false);
     timerReset();
   }
-  // function createBook() {
-  //   setBook([].push(<FiBook />));
-  // }
+
   function getPages(e) {
     e.preventDefault();
-    setPages(e.target.value >= 0 ? e.target.value : 1);
+    setPages(e.target.value >= 1 ? e.target.value : 1);
   }
   function getEndPage(e) {
     e.preventDefault();
-    setEndPages(e.target.value);
+    setEndPages(e.target.value >= 1 ? e.target.value : 1);
   }
   useEffect(() => {
     if (isActive) {
@@ -57,7 +55,6 @@ const Timer = () => {
         if (seconds === 0) {
           if (minutes === 0) {
             clearInterval(myInterval);
-            // createBook();
             setModal(true);
           } else {
             setMinutes(minutes - 1);
@@ -85,6 +82,8 @@ const Timer = () => {
                 required
               />
               <span>{endPages}</span>
+              <h2>You've read: {endPages - pages}</h2>
+              <h3>It's {endPages - pages} per minute</h3>
               <button onClick={closeModal}>set up reading</button>
             </Modal>
           )
@@ -136,13 +135,6 @@ const Timer = () => {
           <RiStopFill />
         </ResetButton>
       </ButtonsContainer>
-      {/* {book.map((item) => {
-        return (
-          <>
-            <span>{item} </span>
-          </>
-        );
-      })} */}
     </TimerContainer>
   );
 };
