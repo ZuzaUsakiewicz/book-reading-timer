@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const TimerContainer = styled.section`
   /* max-width: 300px; */
-  width: ${({ isActive }) => (isActive ? "600px" : "300px")};
-  height: ${({ isActive }) => (isActive ? "600px" : "300px")};
+  width: ${({ isActive }) => (isActive ? "500px" : "300px")};
+  height: ${({ isActive }) => (isActive ? "500px" : "300px")};
   background-color: white;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
