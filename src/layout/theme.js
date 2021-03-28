@@ -23,8 +23,9 @@ export const AppContainer = styled.div`
   align-items: center;
 `;
 export const Header = styled.div`
+  width: 100%;
   display: flex;
-  width: 30%;
+  align-items: center;
   justify-content: space-between;
   padding: 20px;
 `;
@@ -34,8 +35,7 @@ export const ThemeButton = styled.button`
   color: ${(props) => props.theme.buttonFont};
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +43,8 @@ export const ThemeButton = styled.button`
   text-transform: uppercase;
   font-size: 30px;
   transition: opacity 0.4s ease-out;
+  z-index: 999;
+  position: relative;
   &:hover {
     opacity: 0.8;
   }
@@ -53,7 +55,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Play', sans-serif;
 }
 body {
     background-color: ${(props) => props.theme.body};
@@ -67,10 +69,28 @@ button {
   cursor: pointer;
   border: none;
   font-size: 30px;
-  width: 50px;
-  height: 50px;
 }
 i {
   pointer-events: none;
 }
+label {
+  padding: 0.5rem;
+}
+input {
+  cursor: pointer;
+  width: 30%;
+  height: 8vh;
+  border: 2px solid ${(props) => props.theme.fontColor};
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: ${(props) => props.theme.fontColor};
+  background: ${(props) => props.theme.body};
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 `;
