@@ -21,7 +21,7 @@ function App() {
       <GlobalStyles />
       <AppContainer>
         <Header>
-          <h2>Book Time!</h2>
+          <h1>Book Time!</h1>
           <ThemeButton onClick={() => toggleTheme()}>
             {theme === "light" ? <FiMoon /> : <FiSun />}
           </ThemeButton>
