@@ -3,7 +3,9 @@ import {
   ModalContainer,
   StartInputsContainer,
   TimerContainer,
+  ModalButton,
 } from "../layout/Timer.styled";
+import { BiRepeat } from "react-icons/bi";
 
 const Modal = ({ getEndPage, pages, endPages, closeModal }) => {
   return (
@@ -19,18 +21,23 @@ const Modal = ({ getEndPage, pages, endPages, closeModal }) => {
             onChange={getEndPage}
             required
           />
-          <span>{endPages}</span>
-          <h2>You've read: {endPages - pages} pages</h2>
-          <h2>
+          <h4>You've read: {endPages - pages} pages</h4>
+          <h4>
             It's average {((endPages - pages) / pages).toFixed(1)} page per
             minute
-          </h2>
-          <h2>
-            If you spend one hour reading, you will read{" "}
-            {(((endPages - pages) / endPages) * 60).toFixed()} pages
-          </h2>
+          </h4>
+          <h4>
+            If you spend one hour reading, <br />
+            you will read {(
+              ((endPages - pages) / endPages) *
+              60
+            ).toFixed()}{" "}
+            pages
+          </h4>
 
-          <button onClick={closeModal}>set up reading</button>
+          <ModalButton onClick={closeModal}>
+            <BiRepeat />
+          </ModalButton>
         </TimerContainer>
       </StartInputsContainer>
     </ModalContainer>
