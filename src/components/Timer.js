@@ -6,9 +6,9 @@ import {
   ButtonsContainer,
   PausePlayButton,
   ResetButton,
-  Modal,
 } from "../layout/Timer.styled";
 import { RiPlayFill, RiStopFill, RiPauseFill } from "react-icons/ri";
+import Modal from "./Modal";
 
 const Timer = () => {
   const [isActive, setIsActive] = useState(false);
@@ -20,19 +20,21 @@ const Timer = () => {
 
   function getNumbers(e) {
     e.preventDefault();
-    setMinutes(e.target.value >= 0 ? e.target.value : 1);
+    setMinutes(e.target.value >= 1 ? e.target.value : 1);
     setSeconds(0);
   }
 
   function timerStart() {
     setIsActive((prev) => !prev);
   }
+
   function timerReset() {
     setIsActive(false);
     setMinutes(30);
     setSeconds(0);
     setPages(1);
   }
+
   function closeModal() {
     setModal(false);
     timerReset();
@@ -71,31 +73,21 @@ const Timer = () => {
     <TimerContainer isActive={isActive}>
       {minutes === 0 && seconds === 0
         ? { modal } && (
-            <Modal>
-              <label>Type your end page:</label>
-              <input
-                type="number"
-                className="pages"
-                max="10000"
-                min="1"
-                onChange={getEndPage}
-                required
-              />
-              <span>{endPages}</span>
-              <h2>You've read: {endPages - pages}</h2>
-              <h3>It's {endPages - pages} per minute</h3>
-              <button onClick={closeModal}>set up reading</button>
-            </Modal>
+            <Modal
+              getEndPage={getEndPage}
+              pages={pages}
+              endPages={endPages}
+              closeModal={closeModal}
+              setEndPages={setEndPages}
+            />
           )
         : ""}
       {isActive && (
         <ReadingTimeContainer>
+          <p>Keep reading!</p>
           <h1>
             {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
           </h1>
-
-          <span>You've start from: {pages} page</span>
-          <h3>Reading Time!!!</h3>
         </ReadingTimeContainer>
       )}
       {!isActive && (
@@ -124,7 +116,6 @@ const Timer = () => {
             placeholder={1}
             required
           />
-          <h1>{pages}</h1>
         </StartInputsContainer>
       )}
       <ButtonsContainer>
